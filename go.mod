@@ -1,4 +1,4 @@
-module github.com/arthurkay/lucid-framework
+module github.com/arthurkay/lucid
 
 go 1.16
 

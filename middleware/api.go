@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/arthurkay/lucid-framework/utils"
+	"github.com/arthurkay/lucid/utils"
 )
 
 // CheckAuth takes in an handler and returns a handler, otherwise proceeds with processig

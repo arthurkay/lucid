@@ -1,7 +1,7 @@
 # Lucid Framework
 
-[![license](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/arthurkay/lucid-framework/blob/master/LICENSE)
-[![Go Report Card](https://goreportcard.com/badge/github.com/arthurkay/lucid-framework)](https://goreportcard.com/report/github.com/arthurkay/lucid-framework)
+[![license](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/arthurkay/lucid/blob/master/LICENSE)
+[![Go Report Card](https://goreportcard.com/badge/github.com/arthurkay/lucid)](https://goreportcard.com/report/github.com/arthurkay/lucid)
 
 # Introduction
 
@@ -56,6 +56,6 @@ The cli tool for generation and managing of Lucid app implementations.
 Both the CLI and the actual framework are still in active development.
 Contributors are welcome.
 
-* [Lucid CLI](https://github.com/arthurkay/lucid)
+* [Lucid CLI](https://github.com/arthurkay/lucid-cli)
 
-* [Lucid Framework](https://github.com/arthurkay/lucid-framework)
+* [Lucid Framework](https://github.com/arthurkay/lucid)

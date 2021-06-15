@@ -2,9 +2,7 @@ package db
 
 import (
 	"fmt"
-	"os"
 
-	"github.com/joho/godotenv"
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -18,16 +16,6 @@ type Database struct {
 	DBPassword string
 	DBPort     string
 	DBHost     string
-}
-
-// DB database instance
-var DB *Database
-
-// Create the database instance upon import of package
-func init() {
-	godotenv.Load()
-	dbInstance := &Database{DBType: os.Getenv("DB_TYPE"), DBUser: os.Getenv("DB_USER"), DBName: os.Getenv("DB_NAME"), DBPassword: os.Getenv("DB_PASSWORD"), DBHost: os.Getenv("DB_HOST"), DBPort: os.Getenv("DB_PORT")}
-	DB = dbInstance
 }
 
 // MySQLDBConfig initialises a MySQL/MariaDB database instance. Return gorm instance and error

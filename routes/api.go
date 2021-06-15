@@ -1,29 +1,24 @@
 package routes
 
 import (
-	handler "github.com/arthurkay/lucid-framework/handlers"
-	"github.com/arthurkay/lucid-framework/middleware"
-
 	"net/http/pprof"
 
 	"github.com/gorilla/mux"
 )
 
-// Api returns a router instance
-func Api() *mux.Router {
+// ApiRoutes return a router instance, meant for api
+func ApiRoutes() *mux.Router {
+	r := mux.NewRouter()
+	r.StrictSlash(true)
+	return r
+}
+
+// WebRoutes returns a router instance, meant for web
+func WebRoutes() *mux.Router {
 	r := mux.NewRouter()
 	r.StrictSlash(true)
 
-	r.HandleFunc("/", handler.ApiHomeHandler).Methods("POST", "GET")
-	r.HandleFunc("/login", handler.ApiLoginHandler).Methods("POST")
-	r.HandleFunc("/register", handler.ApiRegisterHandler).Methods("POST")
-	r.HandleFunc("/reset-password", handler.ApiResetPasswordHandler).Methods("POST")
-	r.HandleFunc("/new-password", handler.ApiNewPasswordHandler).Methods("POST")
-	auth := r.NewRoute().Subrouter()
-	auth.Use(middleware.CheckAuth)
-	auth.HandleFunc("/service", handler.ApiServiceRequest).Methods("POST")
-
-	// Add the pprof routes
+	// Perfomance measuring metrics
 	r.HandleFunc("/debug/pprof/", pprof.Index)
 	r.HandleFunc("/debug/pprof/cmdline", pprof.Cmdline)
 	r.HandleFunc("/debug/pprof/profile", pprof.Profile)

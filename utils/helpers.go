@@ -1,13 +1,10 @@
 package utils
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"runtime"
 
-	"github.com/arthurkay/lucid-framework/db"
-	"github.com/arthurkay/lucid-framework/models"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -45,17 +42,4 @@ func CreatePasswordHash(password string) ([]byte, bool) {
 func PasswordHashCompare(password string, hash string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 	return err == nil
-}
-
-// FindUserByEmail checks the database for a user with the specified email address
-func FindUserByEmail(email string) (*models.User, error) {
-	dbInstance := db.DB
-	db, err := dbInstance.DBConfig()
-	CheckError(err)
-	var user models.User
-	results := db.Where("email = ?", email).Find(&user)
-	if results.RowsAffected == 0 {
-		return &user, fmt.Errorf("unable to find record for email, %s", email)
-	}
-	return &user, nil
 }

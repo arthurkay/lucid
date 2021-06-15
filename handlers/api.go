@@ -2,11 +2,9 @@ package handlers
 
 import (
 	"encoding/json"
-	"io/ioutil"
 	"net/http"
 
-	"github.com/arthurkay/lucid-framework/models"
-	"github.com/arthurkay/lucid-framework/utils"
+	"github.com/arthurkay/lucid/utils"
 )
 
 // ApiHomeHandler returns the home route api endpoint
@@ -26,39 +24,7 @@ func ApiResetPasswordHandler(w http.ResponseWriter, r *http.Request) {}
 func ApiNewPasswordHandler(w http.ResponseWriter, r *http.Request) {}
 
 // ApiLoginHandler handles all login requests via API calls
-func ApiLoginHandler(w http.ResponseWriter, r *http.Request) {
-	resp, err := ioutil.ReadAll(r.Body)
-	utils.CheckError(err)
-	var userModel models.User
-	jerr := json.Unmarshal(resp, &userModel)
-	utils.CheckError(jerr)
-	user, er := utils.FindUserByEmail(userModel.Email)
-	utils.CheckError(er)
-
-	ok := utils.PasswordHashCompare(userModel.Password, user.Password)
-
-	if ok {
-		// Success, now create a jwt token
-		token, err := utils.CreateToken()
-		utils.CheckError(err)
-		responseData := map[string]string{
-			"status": "success",
-			"token":  token,
-		}
-		data, er := json.Marshal(responseData)
-		utils.CheckError(er)
-		w.Write(data)
-	} else {
-		// Login failure, fail with error
-		responseData := map[string]string{
-			"status":  "failed",
-			"message": "Authentication failure",
-		}
-		data, err := json.Marshal(responseData)
-		utils.CheckError(err)
-		w.Write(data)
-	}
-}
+func ApiLoginHandler(w http.ResponseWriter, r *http.Request) {}
 
 // ApiServiceRequest handles all API request and routes them accordingly
 func ApiServiceRequest(w http.ResponseWriter, r *http.Request) {
