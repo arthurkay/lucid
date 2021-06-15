@@ -16,10 +16,13 @@ func ApiHomeHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(resp)
 }
 
+// ApiRegisterHandler creates an user account
 func ApiRegisterHandler(w http.ResponseWriter, r *http.Request) {}
 
+// ApiResetPasswordHandler trigger a password reset request
 func ApiResetPasswordHandler(w http.ResponseWriter, r *http.Request) {}
 
+// ApiNewPasswordHandler create a new user password
 func ApiNewPasswordHandler(w http.ResponseWriter, r *http.Request) {}
 
 // ApiLoginHandler handles all login requests via API calls

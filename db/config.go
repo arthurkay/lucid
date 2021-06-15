@@ -19,7 +19,7 @@ type Database struct {
 	DBHost     string
 }
 
-// database instance
+// DB database instance
 var DB *Database
 
 // Create the database instance upon import of package
@@ -36,7 +36,7 @@ func (db *Database) MySQLDBConfig() (*gorm.DB, error) {
 	return connection, err
 }
 
-// PostgresSQLConfig initialises a PostgreSQL db instamces, returns gorm, error
+// PostgreSQLConfig initialises a PostgreSQL db instamces, returns gorm, error
 func (db *Database) PostgreSQLConfig() (*gorm.DB, error) {
 	dbConfig := fmt.Sprintf(`host=%s user=%s password=%s dbname=%s 
                         sslmode=disable`,

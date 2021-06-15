@@ -41,7 +41,7 @@ func CreatePasswordHash(password string) ([]byte, bool) {
 
 }
 
-// ValidatePassword checks whether the password and hash in the database cryptographically match
+// PasswordHashCompare checks whether the password and hash in the database cryptographically match
 func PasswordHashCompare(password string, hash string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 	return err == nil
@@ -56,7 +56,6 @@ func FindUserByEmail(email string) (*models.User, error) {
 	results := db.Where("email = ?", email).Find(&user)
 	if results.RowsAffected == 0 {
 		return &user, fmt.Errorf("unable to find record for email, %s", email)
-	} else {
-		return &user, nil
 	}
+	return &user, nil
 }

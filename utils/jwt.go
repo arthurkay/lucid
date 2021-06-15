@@ -47,12 +47,10 @@ func VerifyToken(tokenString string) (bool, error) {
 	token, err := jwt.ParseWithClaims(tokenString, &customClaims{}, func(token *jwt.Token) (interface{}, error) { return string([]byte(key)), nil })
 	if err != nil {
 		return false, err
-	} else {
-		_, ok := token.Claims.(*customClaims)
-		if ok {
-			return true, nil
-		} else {
-			return true, fmt.Errorf("couldn't verify token")
-		}
 	}
+	_, ok := token.Claims.(*customClaims)
+	if ok {
+		return true, nil
+	}
+	return true, fmt.Errorf("couldn't verify token")
 }
