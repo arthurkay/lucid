@@ -53,7 +53,8 @@ The cli tool for generation and managing of Lucid app implementations.
 
 # Project Status
 
-The application for both the CLI and the actual framework are still in active development.
+Both the CLI and the actual framework are still in active development.
+Contributors are welcome.
 
 * [Lucid CLI](https://github.com/arthurkay/lucid)
 

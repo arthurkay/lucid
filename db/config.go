@@ -10,6 +10,7 @@ import (
 	"gorm.io/gorm"
 )
 
+// Database database instance modelling
 type Database struct {
 	DBType     string
 	DBName     string
