@@ -9,6 +9,8 @@ LUCID is a golang backend framework. The frameowrk is meant to address the issue
 
 The lucid cli tool is there to make the generation of the boiler plate code super easy.
 
+## App Setup
+
 The application architecture will take the form of:
 
 * db
