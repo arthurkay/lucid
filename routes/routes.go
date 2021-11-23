@@ -3,12 +3,14 @@ package routes
 import (
 	"net/http/pprof"
 
+	"github.com/arthurkay/lucid/middleware"
 	"github.com/gorilla/mux"
 )
 
 // ApiRoutes return a router instance, meant for api
 func ApiRoutes() *mux.Router {
 	r := mux.NewRouter()
+	r.Use(middleware.DefaultApiHeaders)
 	r.StrictSlash(true)
 	return r
 }
@@ -16,6 +18,7 @@ func ApiRoutes() *mux.Router {
 // WebRoutes returns a router instance, meant for web
 func WebRoutes() *mux.Router {
 	r := mux.NewRouter()
+	r.Use(middleware.DefaultWebHeaders)
 	r.StrictSlash(true)
 
 	// Perfomance measuring metrics

@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 	"strings"
 
@@ -17,7 +18,9 @@ func CheckAuth(next http.Handler) http.Handler {
 		// Make sure authorization is set in http headers
 		if len(token) > 1 {
 			ok, err := utils.VerifyToken(token[1])
-			utils.CheckError(err)
+			if err != nil {
+				log.Printf("%v", err)
+			}
 			if ok {
 				next.ServeHTTP(w, r)
 			} else {
@@ -26,7 +29,9 @@ func CheckAuth(next http.Handler) http.Handler {
 					"message": "Unauthorized access denied",
 				}
 				data, er := json.Marshal(resp)
-				utils.CheckError(er)
+				if er != nil {
+					log.Printf("%v", er)
+				}
 				w.Write(data)
 			}
 		} else {
@@ -35,7 +40,9 @@ func CheckAuth(next http.Handler) http.Handler {
 				"message": "No authorization parameters set",
 			}
 			data, er := json.Marshal(resp)
-			utils.CheckError(er)
+			if er != nil {
+				log.Printf("%v", er)
+			}
 			w.Write(data)
 		}
 	})

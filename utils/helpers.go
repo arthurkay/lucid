@@ -2,11 +2,21 @@ package utils
 
 import (
 	"log"
+	"math/rand"
 	"os"
 	"runtime"
 
 	"golang.org/x/crypto/bcrypt"
 )
+
+// LucidHomeDir is the deafult configuration directory on the syste
+func LucidHomeDir() string {
+	configDir, err := os.UserConfigDir()
+	if err != nil {
+		CheckError(err)
+	}
+	return configDir + "/lucid"
+}
 
 // AppPath returns a tring of the current application path
 var AppPath string = getAppPath()
@@ -42,4 +52,15 @@ func CreatePasswordHash(password string) ([]byte, bool) {
 func PasswordHashCompare(password string, hash string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 	return err == nil
+}
+
+// RandomString generates a random string of the specififed length
+func randomString(n int) string {
+	var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
+	b := make([]rune, n)
+	for i := range b {
+		b[i] = letterRunes[rand.Intn(len(letterRunes))]
+	}
+	return string(b)
 }

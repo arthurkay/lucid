@@ -10,7 +10,8 @@ import (
 // ApiHomeHandler returns the home route api endpoint
 func ApiHomeHandler(w http.ResponseWriter, r *http.Request) {
 	response := map[string]string{"status": "success"}
-	resp, _ := json.Marshal(response)
+	resp, err := json.Marshal(response)
+	utils.CheckError(err)
 	w.Write(resp)
 }
 

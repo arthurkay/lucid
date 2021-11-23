@@ -2,23 +2,16 @@ package utils
 
 import (
 	"fmt"
-	"os"
 	"time"
 
+	"github.com/arthurkay/lucid/db"
 	"github.com/dgrijalva/jwt-go"
-	"github.com/joho/godotenv"
 )
 
 var (
-	erro error  = godotenv.Load()
-	key  string = os.Getenv("AUTH_KEY")
+	DB         = db.DB{DBPath: LucidHomeDir() + "/lucid.db"}
+	key string = DB.Get([]byte("jwt_key"))
 )
-
-func init() {
-	if erro != nil {
-		panic(erro.Error())
-	}
-}
 
 type customClaims struct {
 	name string
@@ -27,11 +20,16 @@ type customClaims struct {
 
 // CreateToken generates a jwt string token and an error
 func CreateToken() (string, error) {
+	// Create DB and initialise it with a value
+	e := DB.Put([]byte("jwt_key"), []byte(randomString(21)))
+	if e != nil {
+		return "", e
+	}
 	claims := customClaims{
-		name: "Universe API",
+		name: "Lucid API",
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(time.Hour * time.Duration(1)).Unix(),
-			Issuer:    "infratel.co.zm",
+			Issuer:    "Arthur Kay",
 		},
 	}
 
